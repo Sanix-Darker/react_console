@@ -5,18 +5,18 @@ An Implementation of a connexion with a Python Microservice
 ## Installation && Deployment
 
 ```shell
-    # To install
-    cd to/the/project
-    npm install
+# To install
+cd to/the/project
+npm install
 
-    # To launch
-    npm start
-    # Or
-    yarn start
+# To launch
+npm start
+# Or
+yarn start
 
-    # The app should be available on http://localhost:3000/
+# The app should be available on http://localhost:3000/
 ```
 
 ## Author
 
-- Parfait (Sanix darker)
+- [Sanix darker](https://github.com/Sanix-Darker)
