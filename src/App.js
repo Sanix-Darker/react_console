@@ -11,7 +11,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App App-logo" alt="logo" />
           <p className="App">
-            [ React Console ] - Implementation Connexion with a Python Micro Service.
+            [ Dispox Console ] - Implementation Connexion with a Python Micro Service.
           </p>
           <EchoConsole />
         </header>

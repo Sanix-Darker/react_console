@@ -24,11 +24,14 @@ class dispox_console extends Component {
 
     }
     render(){
-        console.log("this.props.logs[0]: ", this.props.logs[0]);
+        //console.log("this.props.logs[0]: ", this.props.logs[0]);
         return (
             <div id="terminal">
+                # =================================================================<br/>
                 # Welcome to Dispox Console <br/>
-                # This console allow you to have logs from the python service.<br/><br/>
+                # This console allow you to have logs from the python micro service <br/>
+                # on machine Learning Third party.<br/>
+                # =================================================================<br/><br/>
                 <span>{this.state.list_log}<div>></div></span>
             </div>
         );
