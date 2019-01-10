@@ -1,0 +1,24 @@
+#terminal {
+	max-width:950px;
+	min-width:950px;
+	max-height: 300px;
+	min-height:350px;
+	overflow: auto;
+	padding: 5px;	
+	border: 1px solid rgba(170,170,170, 0.35);
+	border-top: 25px solid rgb(210,210,210);
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+	text-align: left;
+	margin: 10px;
+    font-family: monospace;
+    font-size: 16px;
+    color: #22da26;
+}
+
+#terminal span{
+	font-family: monospace;
+    color: #aaa;
+}

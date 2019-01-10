@@ -1,32 +1,65 @@
 import React, {Component} from 'react';
 
-import Console from 'react-console-component';
-import './react-console.scss';
+import DispoxConsole from './dispox_console';
+
+// Sockets calls
+import { onLog,
+        onConnect,
+        //onDisConnect,
+        onConnected,
+        onDisConnected} from './socket';
+import openSocket from 'socket.io-client';
 
 class EchoConsole extends Component {
     constructor (props){
         super(props);
 
         this.state = {
-            
+            logs: []
         }
     }
-    
-    echo(text) {
-        if(text.toLowerCase() === "help"){
-            this.refs.console.log("This project is an interface to receive logs from the python Microservice(for RabbitMq)");
-        }else{
-            this.refs.console.log(text);
-        }
-        this.refs.console.return();
+
+    addLogs(newlog){
+        let all_log = this.state.logs;
+        all_log.push("> "+newlog);
+        this.setState({
+            logs: all_log
+        });
+    }
+
+    componentDidMount(){
+        const socket = openSocket("http://localhost:5000/test");
+
+        onConnect(socket, value => {
+            //console.log("onConnect value: "+value);
+            this.addLogs("Trying to connect to PythonService...");
+        });
+
+        // onDisConnect(socket, value => {
+        //     // console.log("onDisConnect value: "+value);
+        //     // this.addLogs("Deconnected from PythonService...");
+        // });
+
+        onConnected(socket, value => {
+            //console.log("onConnected value: ",value);
+            this.addLogs("Status: PythonService connected");
+        });
+
+        onDisConnected(socket, value => {
+            //console.log("onDisConnected value: ",value);
+            this.addLogs("Status: PythonService disconnected");
+        });
+
+        onLog(socket, value => {
+            //console.log("onLog value: ", value);
+            this.addLogs("Received: "+value.data);
+        });
     }
 
     render() {
         return (<div>
-                    <Console ref="console"
-                        welcomeMessage = {"Welcome to Dispox Console \nHit 'help' if you are new here."}
-                        handler={(e) => this.echo(e)}
-                        autofocus={true}/>
+                    <DispoxConsole ref="console"
+                        logs={[this.state.logs]}/>
                 </div>);
     }
 }
