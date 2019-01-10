@@ -2,24 +2,20 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import EchoConsole from './EchoConsole';
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div >
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
+          <img src={logo} className="App App-logo" alt="logo" />
+          <p className="App">
+            [ React Console ] - Implementation Connexion with a Python Micro Service.
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <EchoConsole />
         </header>
+        
       </div>
     );
   }
