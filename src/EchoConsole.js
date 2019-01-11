@@ -52,7 +52,7 @@ class EchoConsole extends Component {
 
         onLog(socket, value => {
             //console.log("onLog value: ", value);
-            this.addLogs("Received: "+value.data);
+            this.addLogs(value.data);
         });
     }
 
