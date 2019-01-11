@@ -21,6 +21,13 @@ yarn start
 .open to open the terminal
 ```
 
+## How to use
+```html
+    <button className="open">Open</button>
+    <button className="close">Close</button>
+```
+
+
 ## Render
 
 <img src="render.PNG">

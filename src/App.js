@@ -13,6 +13,7 @@ class App extends Component {
           <p className="App">
             [ Dispox Console ] - Implementation Connexion with a Python Micro Service.
             <button className="open">Open</button>
+            <button className="close">Close</button>
           </p>
           <EchoConsole />
         </header>
