@@ -144,9 +144,9 @@ class dispox_console extends Component {
     
     handleKeyPress(event){
         if(event.key === 'Enter'){
-            console.log('enter press here! ')
-            console.log("Youtr command: "+event.target.value+" can not be executed!");
-            console.log("This feature has been disabled!");
+            // console.log('enter press here! ')
+            // console.log("Youtr command: "+event.target.value+" can not be executed!");
+            // console.log("This feature has been disabled!");
             // axios.get('http://localhost:5000/command?command='+event.target.value)
             //     .then(response => {
             //         console.log(response.data);
