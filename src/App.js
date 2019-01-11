@@ -12,6 +12,7 @@ class App extends Component {
           <img src={logo} className="App App-logo" alt="logo" />
           <p className="App">
             [ Dispox Console ] - Implementation Connexion with a Python Micro Service.
+            <button className="open">Open</button>
           </p>
           <EchoConsole />
         </header>

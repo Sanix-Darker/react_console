@@ -1,6 +1,6 @@
 #terminal {
-	max-width:950px;
-	min-width:950px;
+	max-width:600px;
+	min-width:600px;
 	max-height:300px;
 	min-height:350px;
 	overflow: auto;
@@ -31,4 +31,22 @@
 }
 input:focus{
     outline: none;
+}
+
+.btnTerminal{
+	position: absolute;
+	margin-top: 4px;
+	padding: 9px;
+	border-radius: 100%;
+	cursor: pointer;
+}
+.toggleTerminal{
+	background: red;
+}
+.expandTerminal{
+	background: green;
+	margin-left: 25px;
+}
+#terminalheader{
+	margin-left: 15px;
 }

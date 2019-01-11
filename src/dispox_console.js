@@ -22,17 +22,74 @@ class dispox_console extends Component {
     }
 
     componentDidMount(){
+
+        // Close / Open Terminal
+        let elem = document.getElementById('box'),
+        fadeInInterval,
+        fadeOutInterval;
+        
+        let opens = document.getElementsByClassName('open');
+        for(var i = 0; i < opens.length; i++) {
+          (function(index) {
+            opens[index].addEventListener("click", function() {
+                clearInterval(fadeInInterval);
+                clearInterval(fadeOutInterval);
+                elem.fadeIn = function(timing) {
+                    let newValue = 0;
+                    elem.style.display = 'block';
+                    elem.style.opacity = 0;
+                    fadeInInterval = setInterval(function(){ 
+                        if (newValue < 1) {
+                            newValue += 0.01;
+                        } else if (newValue === 1) {
+                            clearInterval(fadeInInterval);   
+                        }
+                        elem.style.opacity = newValue;
+                    }, timing);
+                }
+                elem.fadeIn(10);
+             })
+          })(i);
+        }
+
+        let closes = document.getElementsByClassName('close');
+        for(var i = 0; i < closes.length; i++) {
+          (function(index) {
+            closes[index].addEventListener("click", function() {
+
+                clearInterval(fadeInInterval);
+                clearInterval(fadeOutInterval);
+                elem.fadeOut = function(timing) {
+                    let newValue = 1;
+                    elem.style.opacity = 1;
+                    fadeOutInterval = setInterval(function(){ 
+                        if (newValue > 0) {
+                            newValue -= 0.01;
+                        } else if (newValue < 0) {
+                            elem.style.opacity = 0;
+                            elem.style.display = 'none';
+                            clearInterval(fadeOutInterval);
+                        }
+                        elem.style.opacity = newValue;
+                    }, timing);
+                }
+                elem.fadeOut(10);
+             })
+          })(i);
+        }
+
+        // Draggable bloc of code
         document.onmousemove=mouseMove;
         document.onmouseup = mouseUp;
-        var dragObject = null;
-        var mouseOffset = null;
+        let dragObject = null;
+        let mouseOffset = null;
 
-        var dragDiv = document.getElementById('terminal');
+        let dragDiv = document.getElementById('box');
         makeDraggable(dragDiv);
         
         function mouseMove(ev){
             ev = ev || window.event;
-            var mousePos = mouseCoords(ev);
+            let mousePos = mouseCoords(ev);
             if (dragObject){
                 dragObject.style.position = 'absolute';
                 dragObject.style.top = (mousePos.y - mouseOffset.y) + 'px';
@@ -43,14 +100,14 @@ class dispox_console extends Component {
         
         function getMouseOffset(target, ev){
           ev = ev || window.event;
-          var docPos = getPosition(target);
-          var mousePos = mouseCoords(ev);
+          let docPos = getPosition(target);
+          let mousePos = mouseCoords(ev);
           return {x: mousePos.x - docPos.x, y: mousePos.y - docPos.y};
         }
         
         function getPosition(e){
-          var left = 0;
-          var top = 0;
+          let left = 0;
+          let top = 0;
           while(e.offsetParent){
             left += e.offsetLeft;
             top += e.offsetTop;
@@ -86,7 +143,7 @@ class dispox_console extends Component {
     }
     
     handleKeyPress(event){
-        if(event.key == 'Enter'){
+        if(event.key === 'Enter'){
             console.log('enter press here! ')
             console.log("Youtr command: "+event.target.value+" can not be executed!");
             console.log("This feature has been disabled!");
@@ -104,26 +161,35 @@ class dispox_console extends Component {
             //     });
         }
     }
-     
+    toggleTerminal(){
+
+    }
+
       render() {
         return (
-            <div id="terminal">
-                # =================================================================<br/>
-                # Welcome to Dispox Console <br/>
-                # This console allow you to have logs from the python micro service <br/>
-                # on machine Learning Third party.<br/>
-                # =================================================================<br/><br/>
-                <span>{this.state.list_log}
-                    <div>
-                        ><input type="text"
-                                className="invisibleInput"
-                                id="input"
-                                onKeyPress={this.handleKeyPress}/>
-                    </div>
-                    <div style={{ float:"left", clear: "both" }}
-                        ref={(el) => { this.messagesEnd = el; }}>
-                    </div>
-                </span>
+            <div id="box">
+                <div id="terminalheader">
+                    <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
+                    <div className="btnTerminal expandTerminal" title="Expand terminal"></div>
+                </div>
+                <div id="terminal">
+                    # =================================================================<br/>
+                    # Welcome to Dispox Console <br/>
+                    # This console allow you to have logs from the python micro service <br/>
+                    # on machine Learning Third party.<br/>
+                    # =================================================================<br/><br/>
+                    <span>{this.state.list_log}
+                        <div>
+                            ><input type="text"
+                                    className="invisibleInput"
+                                    id="input"
+                                    onKeyPress={this.handleKeyPress}/>
+                        </div>
+                        <div style={{ float:"left", clear: "both" }}
+                            ref={(el) => { this.messagesEnd = el; }}>
+                        </div>
+                    </span>
+                </div>
             </div>
         );
     }

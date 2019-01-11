@@ -15,6 +15,10 @@ npm start
 yarn start
 
 # The app should be available on http://localhost:3000/
+
+# For extras feature like closing or open the terminal just use thee class
+.close to close the terminal
+.open to open the terminal
 ```
 
 ## Render
