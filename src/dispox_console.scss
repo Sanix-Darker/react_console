@@ -1,7 +1,7 @@
 #terminal {
 	max-width:950px;
 	min-width:950px;
-	max-height: 300px;
+	max-height:300px;
 	min-height:350px;
 	overflow: auto;
 	padding: 5px;	
@@ -21,4 +21,14 @@
 #terminal span{
 	font-family: monospace;
     color: #aaa;
+}
+.invisibleInput{
+	padding-left: 10px;
+	color: #aaa;
+	width:98%;
+	border: 0px;
+	background: 0;
+}
+input:focus{
+    outline: none;
 }
