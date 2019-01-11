@@ -29,16 +29,16 @@ class dispox_console extends Component {
         fadeOutInterval;
         
         let opens = document.getElementsByClassName('open');
-        for(var i = 0; i < opens.length; i++) {
-          (function(index) {
-            opens[index].addEventListener("click", function() {
+        for(let i = 0; i < opens.length; i++) {
+          ((index) => {
+            opens[index].addEventListener("click", () => {
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
-                elem.fadeIn = function(timing) {
+                elem.fadeIn = (timing) => {
                     let newValue = 0;
                     elem.style.display = 'block';
                     elem.style.opacity = 0;
-                    fadeInInterval = setInterval(function(){ 
+                    fadeInInterval = setInterval(() => { 
                         if (newValue < 1) {
                             newValue += 0.01;
                         } else if (newValue === 1) {
@@ -53,16 +53,16 @@ class dispox_console extends Component {
         }
 
         let closes = document.getElementsByClassName('close');
-        for(var i = 0; i < closes.length; i++) {
-          (function(index) {
-            closes[index].addEventListener("click", function() {
+        for(let i = 0; i < closes.length; i++) {
+          ((index) => {
+            closes[index].addEventListener("click", () => {
 
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
                 elem.fadeOut = function(timing) {
                     let newValue = 1;
                     elem.style.opacity = 1;
-                    fadeOutInterval = setInterval(function(){ 
+                    fadeOutInterval = setInterval( () => { 
                         if (newValue > 0) {
                             newValue -= 0.01;
                         } else if (newValue < 0) {
@@ -140,6 +140,19 @@ class dispox_console extends Component {
             y: ev.clientY + document.body.scrollTop - document.body.clientTop
           };
         }
+        document.getElementById('terminal').classList.add("notfullscreen");
+        // Expand code
+        let expand = false;
+        document.getElementById("expand").addEventListener("click", () => {
+            if( expand === true){
+                document.getElementById('terminal').classList.remove("fullscreen");
+                document.getElementById('terminal').classList.add("notfullscreen");
+            }else{
+                document.getElementById('terminal').classList.add("fullscreen");
+                document.getElementById('terminal').classList.remove("notfullscreen");
+            }
+            expand = !expand;
+        });
     }
     
     handleKeyPress(event){
@@ -168,11 +181,11 @@ class dispox_console extends Component {
       render() {
         return (
             <div id="box">
-                <div id="terminalheader">
-                    <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
-                    <div className="btnTerminal expandTerminal" title="Expand terminal"></div>
-                </div>
                 <div id="terminal">
+                    <div id="terminalheader">
+                        <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
+                        <div className="btnTerminal expandTerminal" id="expand" title="Expand terminal"></div>
+                    </div>
                     # =================================================================<br/>
                     # Welcome to Dispox Console <br/>
                     # This console allow you to have logs from the python micro service <br/>
