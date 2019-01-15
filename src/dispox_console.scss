@@ -13,14 +13,21 @@
 	color: #22da26;
 	box-shadow: 0 5px 8px rgba(0,0,0,0.4);
 }
-
+.statusWorking{
+	color: lightblue;
+}
+/* .statusHeader{
+	margin-top: 10px; 
+}*/
 #box{
+	resize: both;
 	overflow: hidden;
 }
 .notfullscreen{
-	width:600px;
-	height:300px;
-	max-height:300px;
+	width:700px;
+	height:360px;
+	max-height:500px;
+	min-height:360px;
 	overflow: auto;
 }
 .fullscreen{
@@ -33,7 +40,7 @@
     top: 0!important;
     left: 0!important;
  }
-#terminal span{
+#terminal nav{
 	font-size: 13px;
 	font-family: monospace;
     color: #aaa;
@@ -48,13 +55,22 @@
 input:focus{
     outline: none;
 }
-
+/*
+.titleConsole{
+    width: 81%;
+    text-align: right;
+    position: absolute;
+    color: black;
+    margin-top: -30px;
+}
+*/
 .btnTerminal{
 	position: absolute;
 	margin-top: 4px;
 	padding: 9px;
 	border-radius: 100%;
 	cursor: pointer;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.5);
 }
 .toggleTerminal{
 	background: red;
@@ -63,9 +79,41 @@ input:focus{
 	background: green;
 	margin-left: 25px;
 }
+.resizeTerminal{
+	background: yellow;
+	margin-left: 50px;
+}
 #terminalheader{
-	position: fixed;
 	z-index: 9999!important;
 	margin-top: -30px;
 	margin-left: 0px;
+}
+.absolute_position{
+	position: absolute;
+}
+.fixed_position{
+	position: fixed;
+}
+
+/* Loader CSS script */
+#loading {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+
+.statusWorking b{
+	color:yellowgreen;
 }

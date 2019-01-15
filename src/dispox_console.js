@@ -6,19 +6,80 @@ import './dispox_console.scss';
 class dispox_console extends Component {
 
     state = {
-        list_log: ""
+        list_log: "",
+        start_timer: false,
+        current_step: 0,
+        estimate_time: "Calculating...",
+        array_status_step: [
+            <span>
+                * [<span id="loading"></span>] Data generation for machine learning.<br/>
+            </span>,
+            <span>
+                * [<b>✓</b>] Data generation for machine learning.<br/>
+                * [<span id="loading"></span>] Model training...<br/>
+            </span>,
+            <span>
+                * [<b>✓</b>] Data generation for machine learning.<br/>
+                * [<b>✓</b>] Model training.<br/>
+                * [<span id="loading"></span>] ATM (Analytic Twin Model) generation...<br/>
+            </span>,
+            <span>
+                * [<b>✓</b>] Data generation for machine learning.<br/>
+                * [<b>✓</b>] Model training.<br/>
+                * [<b>✓</b>] ATM (Analytic Twin Model) generation.<br/>
+                * [<span id="loading"></span>] Model ready for scoring... (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
+            </span>,
+            <span>
+                * [<b>✓</b>] Data generation for machine learning.<br/>
+                * [<b>✓</b>] Model training.<br/>
+                * [<b>✓</b>] ATM (Analytic Twin Model) generation.<br/>
+                * [<b>✓</b>] Model ready for scoring. (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
+            </span>
+        ]
     }
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
             list_log: nextProps.logs[0].map((log, i) => {
                 return <div key={i}>{log}<br/></div>;
-            })
+            }),
+            current_step: nextProps.step,
+            estimate_time: nextProps.estimate_time
         });
+
+        console.log("this.state.current_step: ", this.state.current_step);
+
+        if(this.state.start_timer === false){
+            // console.log("this.props.logs[0].length: ", this.props.logs[0].length);
+            if(this.props.logs[0].length > 1){
+                this.state.start_timer = true;
+                // console.log("this.state.start_timer: ", this.state.start_timer);
+                this.startTimer();
+            }
+        }
     };
 
     scrollToBottom = () => {
         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    startTimer(){
+        const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+        let s = new Date().getTime(),
+            x = setInterval(function() {
+    
+            let present = new Date().getTime(),
+                gap = s - present;
+    
+                document.getElementById('remaining-days').innerText = -(Math.floor(gap / (day)) + 1);
+                document.getElementById('remaining-hours').innerText = -(Math.floor((gap % (day)) / (hour)) + 1);
+                document.getElementById('remaining-minutes').innerText = -(Math.floor((gap % (hour)) / (minute)) + 1);
+                document.getElementById('remaining-seconds').innerText = -(Math.floor((gap % (minute)) / second) + 1);
+            });
     }
 
     componentDidMount(){
@@ -86,7 +147,16 @@ class dispox_console extends Component {
 
         let dragDiv = document.getElementById('box');
         makeDraggable(dragDiv);
-        
+
+        // let draggable_or_resizable = true;
+        // if (draggable_or_resizable){
+        //     makeDraggable(dragDiv);
+        // }
+        // // Code pour resize la console a to moment
+        // document.getElementById("resize").addEventListener("click", () => {
+        //     draggable_or_resizable = !draggable_or_resizable;
+        // });
+
         function mouseMove(ev){
             ev = ev || window.event;
             let mousePos = mouseCoords(ev);
@@ -147,12 +217,20 @@ class dispox_console extends Component {
             if( expand === true){
                 document.getElementById('terminal').classList.remove("fullscreen");
                 document.getElementById('terminal').classList.add("notfullscreen");
+
+                // By default, add the absolute position to terminalheader
+                document.getElementById('terminalheader').classList.remove("fixed_position");
+                document.getElementById('terminalheader').classList.add("absolute_position");
             }else{
                 document.getElementById('terminal').classList.add("fullscreen");
                 document.getElementById('terminal').classList.remove("notfullscreen");
+
+                document.getElementById('terminalheader').classList.remove("absolute_position");
+                document.getElementById('terminalheader').classList.add("fixed_position");
             }
             expand = !expand;
         });
+
     }
     
     handleKeyPress(event){
@@ -182,26 +260,46 @@ class dispox_console extends Component {
         return (
             <div id="box">
                 <div id="terminal">
+                
+                    { /* <div className="titleConsole">Terminal</div> */ }
+
                     <div id="terminalheader">
                         <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
                         <div className="btnTerminal expandTerminal" id="expand" title="Expand terminal"></div>
+                        <div className="btnTerminal resizeTerminal" id="resize" title="Resize terminal"></div>
                     </div>
-                    # =================================================================<br/>
-                    # Welcome to Dispox Console <br/>
-                    # This console allow you to have logs from the python micro service <br/>
-                    # on machine Learning Third party.<br/>
-                    # =================================================================<br/><br/>
-                    <span>{this.state.list_log}
-                        <div>
+                    <div className="statusHeader">
+                        # =============================================================================<br/>
+                        # =============================================================================<br/>
+                        # Welcome to Dispox cloud computing console <br/>
+                        # This console allow you to view progress logs from cloud servers cluster <br/>
+                        # running Dispox simulation and machine learning computing.<br/>
+                        # =============================================================================<br/><br/>
+                    </div>
+
+                    <div className="statusWorking">
+                         --ML progress messages sections------------------------------------------------<br/>
+                        {!this.state.start_timer ? <span>* [<span id="loading"></span>] Waiting for Connexion ...<br/></span> :
+                            <span>
+                                * <span style={{fontSize:'12px', color:'yellow'}}>Elapsed time : <span id="remaining-days">0</span>d - <span id="remaining-hours">00</span>h:<span id="remaining-minutes">00</span>m:<span id="remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
+                                {this.state.array_status_step[this.state.current_step]}
+                            </span>
+                        }
+                        -------------------------------------------------------------------------------
+                    </div>
+                    <nav>
+                        ↑ Server logs :
+                        {/*<div>
                             ><input type="text"
                                     className="invisibleInput"
                                     id="input"
                                     onKeyPress={this.handleKeyPress}/>
-                        </div>
-                        <div style={{ float:"left", clear: "both" }}
+                        </div>*/}
+                        {this.state.list_log}
+                        {/*<div style={{ float:"left", clear: "both" }}
                             ref={(el) => { this.messagesEnd = el; }}>
-                        </div>
-                    </span>
+                        </div>*/}
+                    </nav>
                 </div>
             </div>
         );

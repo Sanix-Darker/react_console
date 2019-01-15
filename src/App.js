@@ -15,7 +15,7 @@ class App extends Component {
             <button className="open">Open</button>
             <button className="close">Close</button>
           </p>
-          <EchoConsole />
+          <EchoConsole socket_server = "http://192.168.56.1:5000"/>
         </header>
         
       </div>

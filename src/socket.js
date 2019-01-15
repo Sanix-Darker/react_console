@@ -30,3 +30,9 @@ export const onLog = (socket, cb) => {
       cb(parameter);
     })
 }
+
+export const onStep = (socket, cb) => {
+    socket.on('onStep', (parameter) => {
+      cb(parameter);
+    })
+}
