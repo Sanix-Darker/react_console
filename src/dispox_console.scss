@@ -79,7 +79,7 @@ input:focus{
 	background: green;
 	margin-left: 25px;
 }
-.resizeTerminal{
+.minimizeTerminal{
 	background: yellow;
 	margin-left: 50px;
 }
@@ -116,4 +116,8 @@ input:focus{
 
 .statusWorking b{
 	color:yellowgreen;
+}
+
+.minHeightBox{
+    height: 37px;
 }

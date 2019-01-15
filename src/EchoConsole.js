@@ -7,6 +7,7 @@ import { onStep,
         onLog,
         onConnect,
         //onDisConnect,
+        onEstimateTime,
         onConnected,
         onDisConnected} from './socket';
 import openSocket from 'socket.io-client';
@@ -17,7 +18,8 @@ class EchoConsole extends Component {
 
         this.state = {
             logs: [],
-            step: 0
+            step: 0,
+            estimate_time: "Calculating...."
         }
     }
 
@@ -79,12 +81,19 @@ class EchoConsole extends Component {
                 step: value.data
             });
         });
+
+        onEstimateTime(socket, value => {
+            //console.log("onLog value: ", value);
+            this.setState({
+                estimate_time: value.data
+            });
+        });
     }
 
     render() {
         return (<div>
                     <DispoxConsole ref="console"
-                        estimate_time = "0d - 00h:50m:00s"
+                        estimate_time = {this.state.estimate_time}
                         step = {this.state.step}
                         logs={[this.state.logs]}/>
                 </div>);

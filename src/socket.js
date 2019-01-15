@@ -18,7 +18,6 @@ export const onConnected = (socket, cb) => {
     })
 }
 
-
 export const onDisConnected = (socket, cb) => {
     socket.on('onDisConnected', (parameter) => {
       cb(parameter);
@@ -33,6 +32,12 @@ export const onLog = (socket, cb) => {
 
 export const onStep = (socket, cb) => {
     socket.on('onStep', (parameter) => {
+      cb(parameter);
+    })
+}
+
+export const onEstimateTime = (socket, cb) => {
+    socket.on('onEstimateTime', (parameter) => {
       cb(parameter);
     })
 }

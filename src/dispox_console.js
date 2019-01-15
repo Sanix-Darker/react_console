@@ -9,7 +9,7 @@ class dispox_console extends Component {
         list_log: "",
         start_timer: false,
         current_step: 0,
-        estimate_time: "Calculating...",
+        estimate_time: "",
         array_status_step: [
             <span>
                 * [<span id="loading"></span>] Data generation for machine learning.<br/>
@@ -148,15 +148,6 @@ class dispox_console extends Component {
         let dragDiv = document.getElementById('box');
         makeDraggable(dragDiv);
 
-        // let draggable_or_resizable = true;
-        // if (draggable_or_resizable){
-        //     makeDraggable(dragDiv);
-        // }
-        // // Code pour resize la console a to moment
-        // document.getElementById("resize").addEventListener("click", () => {
-        //     draggable_or_resizable = !draggable_or_resizable;
-        // });
-
         function mouseMove(ev){
             ev = ev || window.event;
             let mousePos = mouseCoords(ev);
@@ -231,6 +222,18 @@ class dispox_console extends Component {
             expand = !expand;
         });
 
+
+        // Minimize the Terminal
+        let box_long = true;
+        document.getElementById("minimize").addEventListener("click", () => {
+            // minHeightBox
+            if(box_long === true){
+                document.getElementById('box').classList.add("minHeightBox");
+            }else{
+                document.getElementById('box').classList.remove("minHeightBox");
+            }
+            box_long = !box_long;
+        });
     }
     
     handleKeyPress(event){
@@ -260,13 +263,11 @@ class dispox_console extends Component {
         return (
             <div id="box">
                 <div id="terminal">
-                
                     { /* <div className="titleConsole">Terminal</div> */ }
-
                     <div id="terminalheader">
                         <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
                         <div className="btnTerminal expandTerminal" id="expand" title="Expand terminal"></div>
-                        <div className="btnTerminal resizeTerminal" id="resize" title="Resize terminal"></div>
+                        <div className="btnTerminal minimizeTerminal" id="minimize" title="Minimize terminal"></div>
                     </div>
                     <div className="statusHeader">
                         # =============================================================================<br/>
