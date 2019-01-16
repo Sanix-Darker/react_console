@@ -51,7 +51,7 @@ class dispox_console extends Component {
 
         if(this.state.start_timer === false){
             // console.log("this.props.logs[0].length: ", this.props.logs[0].length);
-            if(this.props.logs[0].length > 1){
+            if(this.props.logs[0].length > 2){
                 this.state.start_timer = true;
                 // console.log("this.state.start_timer: ", this.state.start_timer);
                 this.startTimer();
@@ -280,16 +280,19 @@ class dispox_console extends Component {
 
                     <div className="statusWorking">
                          --ML progress messages sections------------------------------------------------<br/>
-                        {!this.state.start_timer ? <span>* [<span id="loading"></span>] Waiting for Connexion ...<br/></span> :
-                            <span>
-                                * <span style={{fontSize:'12px', color:'yellow'}}>Elapsed time : <span id="remaining-days">0</span>d - <span id="remaining-hours">00</span>h:<span id="remaining-minutes">00</span>m:<span id="remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
-                                {this.state.array_status_step[this.state.current_step]}
-                            </span>
-                        }
+                         {this.props.logs[0].length === 2 ? /* if == 2 the server is connected... technically */
+                            <span>* [<span id="loading"></span>] Server Connected, processing...<br/></span>:
+                            !this.state.start_timer ? /* if not start timer Waiting for Connexion */
+                                <span>* [<span id="loading"></span>] Waiting for Connexion ...<br/></span> :
+                                <span>
+                                    * <span style={{fontSize:'12px', color:'yellow'}}>Elapsed time : <span id="remaining-days">0</span>d - <span id="remaining-hours">00</span>h:<span id="remaining-minutes">00</span>m:<span id="remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
+                                    {this.state.array_status_step[this.state.current_step]}
+                                </span>
+                         }
                         -------------------------------------------------------------------------------
                     </div>
                     <nav>
-                        ↑ Server logs :
+                        ↑ Server logs ↑
                         {/*<div>
                             ><input type="text"
                                     className="invisibleInput"

@@ -46,6 +46,10 @@ class EchoConsole extends Component {
     }
 
     componentDidMount(){
+
+        // Faire un ping reccurent setinterval au serveur pour etre sur que le serveur soit toujours available
+
+
         const socket = openSocket(this.props.socket_server+"/test");
 
         onConnect(socket, value => {
