@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import EchoConsole from './EchoConsole';
+import EchoConsole from './EchoConsole/EchoConsole';
 
 class App extends Component {
   render() {

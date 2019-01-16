@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import DispoxConsole from './dispox_console';
 
 // Sockets calls
-import { onStep,
+import {onStop,
+        onStep,
         onLog,
         onConnect,
         //onDisConnect,
@@ -19,7 +20,8 @@ class EchoConsole extends Component {
         this.state = {
             logs: [],
             step: 0,
-            estimate_time: "Calculating...."
+            estimate_time: "Calculating....",
+            stop: false
         }
     }
 
@@ -86,6 +88,12 @@ class EchoConsole extends Component {
             });
         });
 
+        onStop(socket, value => {
+            this.setState({
+                stop: !this.state.stop
+            });
+        });
+
         onEstimateTime(socket, value => {
             //console.log("onLog value: ", value);
             this.setState({
@@ -99,7 +107,8 @@ class EchoConsole extends Component {
                     <DispoxConsole ref="console"
                         estimate_time = {this.state.estimate_time}
                         step = {this.state.step}
-                        logs={[this.state.logs]}/>
+                        stop = {this.state.stop}
+                        logs={this.state.logs}/>
                 </div>);
     }
 }
