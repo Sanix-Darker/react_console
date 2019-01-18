@@ -85,15 +85,15 @@ class dispox_console extends Component {
 
     componentDidMount(){
 
-        // Close / Open echoxconsole_terminal
+        // echoxconsole_close / echoxconsole_open echoxconsole_terminal
         let elem = document.getElementById('echoxconsole_box'),
         fadeInInterval,
         fadeOutInterval;
         
-        let opens = document.getElementsByClassName('open');
-        for(let i = 0; i < opens.length; i++) {
+        let echoxconsole_opens = document.getElementsByClassName('echoxconsole_open');
+        for(let i = 0; i < echoxconsole_opens.length; i++) {
           ((index) => {
-            opens[index].addEventListener("click", () => {
+            echoxconsole_opens[index].addEventListener("click", () => {
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
                 elem.fadeIn = (timing) => {
@@ -114,10 +114,10 @@ class dispox_console extends Component {
           })(i);
         }
 
-        let closes = document.getElementsByClassName('close');
-        for(let i = 0; i < closes.length; i++) {
+        let echoxconsole_closes = document.getElementsByClassName('echoxconsole_close');
+        for(let i = 0; i < echoxconsole_closes.length; i++) {
           ((index) => {
-            closes[index].addEventListener("click", () => {
+            echoxconsole_closes[index].addEventListener("click", () => {
 
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
@@ -205,7 +205,7 @@ class dispox_console extends Component {
         document.getElementById('echoxconsole_terminal').classList.add("notfullscreen");
         // Expand code
         let expand = false;
-        document.getElementById("expand").addEventListener("click", () => {
+        document.getElementById("echoxconsole_expand").addEventListener("click", () => {
             if( expand === true){
                 document.getElementById('echoxconsole_terminal').classList.remove("fullscreen");
                 document.getElementById('echoxconsole_terminal').classList.add("notfullscreen");
@@ -226,7 +226,7 @@ class dispox_console extends Component {
 
         // Minimize the echoxconsole_terminal
         let echoxconsole_box_long = true;
-        document.getElementById("minimize").addEventListener("click", () => {
+        document.getElementById("echoxconsole_minimize").addEventListener("click", () => {
             // minHeightechoxconsole_box
             if(echoxconsole_box_long === true){
                 document.getElementById('echoxconsole_box').classList.add("minHeightechoxconsole_box");
@@ -266,9 +266,9 @@ class dispox_console extends Component {
                 <div id="echoxconsole_terminal">
                     { /* <div className="titleConsole">echoxconsole_terminal</div> */ }
                     <div id="echoxconsole_terminalheader">
-                        <div className="btnechoxconsole_terminal toggleechoxconsole_terminal close" title="Close echoxconsole_terminal"></div>
-                        <div className="btnechoxconsole_terminal expandechoxconsole_terminal" id="expand" title="Expand echoxconsole_terminal"></div>
-                        <div className="btnechoxconsole_terminal minimizeechoxconsole_terminal" id="minimize" title="Minimize echoxconsole_terminal"></div>
+                        <div className="btnechoxconsole_terminal toggleechoxconsole_terminal echoxconsole_close" title="echoxconsole_close echoxconsole_terminal"></div>
+                        <div className="btnechoxconsole_terminal expandechoxconsole_terminal" id="echoxconsole_expand" title="Expand echoxconsole_terminal"></div>
+                        <div className="btnechoxconsole_terminal minimizeechoxconsole_terminal" id="echoxconsole_minimize" title="Minimize echoxconsole_terminal"></div>
                     </div>
                     <div className="echoxconsole_statusHeader">
                         <br/>

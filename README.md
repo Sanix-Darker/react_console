@@ -17,8 +17,8 @@ yarn start
 # The app should be available on http://localhost:3000/
 
 # For extras feature like closing or open the echoxconsole_terminal just use thee class
-.close to close the echoxconsole_terminal
-.open to open the echoxconsole_terminal
+.echoxconsole_close to close the echoxconsole_terminal
+.echoxconsole_open to open the echoxconsole_terminal
 ```
 
 ## How to use
@@ -31,9 +31,9 @@ import EchoConsole from './EchoConsole/EchoConsole'
 <EchoConsole ddx_id = {ddx_id}
             socket_server = "http://192.168.56.1:5000"/>
 
-<!-- Close and open the console with open/close classes -->
-<button className="open">Open</button>
-<button className="close">Close</button>
+<!-- close and open the console with echoxconsole_open/echoxconsole_close classes -->
+<button className="echoxconsole_open">echoxconsole_open</button>
+<button className="echoxconsole_close">echoxconsole_close</button>
 ```
 
 ## Render
