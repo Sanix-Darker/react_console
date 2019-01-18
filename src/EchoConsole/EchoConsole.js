@@ -18,6 +18,7 @@ class EchoConsole extends Component {
         super(props);
 
         this.state = {
+            ddx_id: "",
             logs: [],
             step: 0,
             estimate_time: "Calculating....",
@@ -47,14 +48,20 @@ class EchoConsole extends Component {
         });
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            ddx_id: nextProps.ddx_id
+        });
+        console.log("nextProps: ", nextProps);
+    }
+
     componentDidMount(){
 
         // Faire un ping reccurent setinterval au serveur pour etre sur que le serveur soit toujours available
-
-
+        
         const socket = openSocket(this.props.socket_server+"/test");
 
-        onConnect(socket, value => {
+        onConnect(this.state.ddx_id, socket, value => {
             //console.log("onConnect value: "+value);
             //this.addLogs("Trying to connect to PythonService...");
         });
@@ -65,6 +72,7 @@ class EchoConsole extends Component {
         //     // this.addLogs("Deconnected from PythonService...");
         // });
 
+        // getters ==============================================
         onConnected(socket, value => {
             //console.log("onConnected value: ",value);
             this.addLogs("Status: PythonService connected");

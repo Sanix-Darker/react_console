@@ -4,13 +4,19 @@
  * @param {*} cb 
  */
 
-export const onConnect = (socket, cb) => {
-    socket.emit('onConnect', {data: 'I\'m connected!'});
+// import uuid from 'uuid/v4';
+
+// let room = uuid();
+
+// Generer le uuid ici et se balader avec en temps que room
+
+export const onConnect = (room, socket, cb) => {
+    socket.emit('onConnect', {data: 'I\'m connected!', room: room});
 }
 
-export const onDisConnect = (socket, cb) => {
-    socket.emit('onDisConnect', {data: 'I\'m disconnected!'});
-}
+// export const onDisConnect = (socket, cb) => {
+//     socket.emit('onDisConnect', {data: 'I\'m disconnected!', room: room});
+// }
 
 export const onConnected = (socket, cb) => {
     socket.on('onConnected', (parameter) => {

@@ -28,7 +28,8 @@ import EchoConsole from './EchoConsole/EchoConsole'
 
 ```html
 <!-- Pass the socket server url to EchoConsole -->
-<EchoConsole socket_server = "http://192.168.56.1:5000"/>
+<EchoConsole ddx_id = {ddx_id}
+            socket_server = "http://192.168.56.1:5000"/>
 
 <!-- Close and open the console with open/close classes -->
 <button className="open">Open</button>

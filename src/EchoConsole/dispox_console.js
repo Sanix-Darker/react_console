@@ -271,16 +271,16 @@ class dispox_console extends Component {
                         <div className="btnTerminal minimizeTerminal" id="minimize" title="Minimize terminal"></div>
                     </div>
                     <div className="statusHeader">
-                        # =============================================================================<br/>
-                        # =============================================================================<br/>
+                        <br/>
+                        # ==========================================================================<br/>
                         # Welcome to Dispox cloud computing console <br/>
                         # This console allow you to view progress logs from cloud servers cluster <br/>
                         # running Dispox simulation and machine learning computing.<br/>
-                        # =============================================================================<br/><br/>
+                        # ==========================================================================<br/><br/>
                     </div>
 
                     <div className="statusWorking">
-                         --ML progress messages sections------------------------------------------------<br/>
+                         --ML progress messages sections---------------------------------------------<br/>
                          {this.state.stop ? 
                             <div>
                                 * <span className="extraMiniInfoConsole">Estimate time : {this.state.estimate_time}</span><br/>
@@ -295,7 +295,7 @@ class dispox_console extends Component {
                                         {this.state.array_status_step[this.state.current_step]}
                                     </span>
                          }
-                        -------------------------------------------------------------------------------
+                        ----------------------------------------------------------------------------
                     </div>
                     <nav>
                         ↑ Server logs ↑
