@@ -16,9 +16,9 @@ yarn start
 
 # The app should be available on http://localhost:3000/
 
-# For extras feature like closing or open the terminal just use thee class
-.close to close the terminal
-.open to open the terminal
+# For extras feature like closing or open the echoxconsole_terminal just use thee class
+.close to close the echoxconsole_terminal
+.open to open the echoxconsole_terminal
 ```
 
 ## How to use

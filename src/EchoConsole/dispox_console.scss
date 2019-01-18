@@ -1,4 +1,4 @@
-#terminal {
+#echoxconsole_terminal {
 	padding: 5px;	
 	border: 1px solid rgba(170,170,170, 0.35);
 	border-top: 25px solid rgb(210,210,210);
@@ -11,15 +11,15 @@
     font-family: monospace;
     font-size: 16px;
 	color: #22da26;
-	box-shadow: 0 5px 8px rgba(0,0,0,0.4);
+	echoxconsole_box-shadow: 0 5px 8px rgba(0,0,0,0.4);
 }
-.statusWorking{
+.echoxconsole_statusWorking{
 	color: lightblue;
 }
-/* .statusHeader{
+/* .echoxconsole_statusHeader{
 	margin-top: 10px; 
 }*/
-#box{
+#echoxconsole_box{
 	resize: both;
 	overflow: hidden;
 }
@@ -40,7 +40,7 @@
     top: 0!important;
     left: 0!important;
  }
-#terminal nav{
+#echoxconsole_terminal nav{
 	font-size: 13px;
 	font-family: monospace;
     color: #aaa;
@@ -64,26 +64,26 @@ input:focus{
     margin-top: -30px;
 }
 */
-.btnTerminal{
+.btnechoxconsole_terminal{
 	position: absolute;
 	margin-top: 4px;
 	padding: 9px;
 	border-radius: 100%;
 	cursor: pointer;
-	box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+	echoxconsole_box-shadow: 0 3px 6px rgba(0,0,0,0.5);
 }
-.toggleTerminal{
+.toggleechoxconsole_terminal{
 	background: red;
 }
-.expandTerminal{
+.expandechoxconsole_terminal{
 	background: green;
 	margin-left: 25px;
 }
-.minimizeTerminal{
+.minimizeechoxconsole_terminal{
 	background: yellow;
 	margin-left: 50px;
 }
-#terminalheader{
+#echoxconsole_terminalheader{
 	z-index: 9999!important;
 	margin-top: -30px;
 	margin-left: 0px;
@@ -96,7 +96,7 @@ input:focus{
 }
 
 /* Loader CSS script */
-#loading {
+#echoxconsole_loading {
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -114,11 +114,11 @@ input:focus{
   to { -webkit-transform: rotate(360deg); }
 }
 
-.statusWorking b{
+.echoxconsole_statusWorking b{
 	color:yellowgreen;
 }
 
-.minHeightBox{
+.minHeightechoxconsole_box{
 	height: 36px;
 	width: 150px;
 }

@@ -13,22 +13,22 @@ class dispox_console extends Component {
         estimate_time: "",
         array_status_step: [
             <span>
-                * [<span id="loading"></span>] Data generation for machine learning.<br/>
+                * [<span id="echoxconsole_loading"></span>] Data generation for machine learning.<br/>
             </span>,
             <span>
                 * [<b>✓</b>] Data generation for machine learning.<br/>
-                * [<span id="loading"></span>] Model training...<br/>
+                * [<span id="echoxconsole_loading"></span>] Model training...<br/>
             </span>,
             <span>
                 * [<b>✓</b>] Data generation for machine learning.<br/>
                 * [<b>✓</b>] Model training.<br/>
-                * [<span id="loading"></span>] ATM (Analytic Twin Model) generation...<br/>
+                * [<span id="echoxconsole_loading"></span>] ATM (Analytic Twin Model) generation...<br/>
             </span>,
             <span>
                 * [<b>✓</b>] Data generation for machine learning.<br/>
                 * [<b>✓</b>] Model training.<br/>
                 * [<b>✓</b>] ATM (Analytic Twin Model) generation.<br/>
-                * [<span id="loading"></span>] Model ready for scoring... (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
+                * [<span id="echoxconsole_loading"></span>] Model ready for scoring... (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
             </span>,
             <span>
                 * [<b>✓</b>] Data generation for machine learning.<br/>
@@ -76,17 +76,17 @@ class dispox_console extends Component {
             let present = new Date().getTime(),
                 gap = s - present;
     
-                document.getElementById('remaining-days').innerText = -(Math.floor(gap / (day)) + 1);
-                document.getElementById('remaining-hours').innerText = -(Math.floor((gap % (day)) / (hour)) + 1);
-                document.getElementById('remaining-minutes').innerText = -(Math.floor((gap % (hour)) / (minute)) + 1);
-                document.getElementById('remaining-seconds').innerText = -(Math.floor((gap % (minute)) / second) + 1);
+                document.getElementById('echoxconsole_remaining-days').innerText = -(Math.floor(gap / (day)) + 1);
+                document.getElementById('echoxconsole_remaining-hours').innerText = -(Math.floor((gap % (day)) / (hour)) + 1);
+                document.getElementById('echoxconsole_remaining-minutes').innerText = -(Math.floor((gap % (hour)) / (minute)) + 1);
+                document.getElementById('echoxconsole_remaining-seconds').innerText = -(Math.floor((gap % (minute)) / second) + 1);
             });
     }
 
     componentDidMount(){
 
-        // Close / Open Terminal
-        let elem = document.getElementById('box'),
+        // Close / Open echoxconsole_terminal
+        let elem = document.getElementById('echoxconsole_box'),
         fadeInInterval,
         fadeOutInterval;
         
@@ -146,7 +146,7 @@ class dispox_console extends Component {
         let dragObject = null;
         let mouseOffset = null;
 
-        let dragDiv = document.getElementById('box');
+        let dragDiv = document.getElementById('echoxconsole_box');
         makeDraggable(dragDiv);
 
         function mouseMove(ev){
@@ -202,38 +202,38 @@ class dispox_console extends Component {
             y: ev.clientY + document.body.scrollTop - document.body.clientTop
           };
         }
-        document.getElementById('terminal').classList.add("notfullscreen");
+        document.getElementById('echoxconsole_terminal').classList.add("notfullscreen");
         // Expand code
         let expand = false;
         document.getElementById("expand").addEventListener("click", () => {
             if( expand === true){
-                document.getElementById('terminal').classList.remove("fullscreen");
-                document.getElementById('terminal').classList.add("notfullscreen");
+                document.getElementById('echoxconsole_terminal').classList.remove("fullscreen");
+                document.getElementById('echoxconsole_terminal').classList.add("notfullscreen");
 
-                // By default, add the absolute position to terminalheader
-                document.getElementById('terminalheader').classList.remove("fixed_position");
-                document.getElementById('terminalheader').classList.add("absolute_position");
+                // By default, add the absolute position to echoxconsole_terminalheader
+                document.getElementById('echoxconsole_terminalheader').classList.remove("fixed_position");
+                document.getElementById('echoxconsole_terminalheader').classList.add("absolute_position");
             }else{
-                document.getElementById('terminal').classList.add("fullscreen");
-                document.getElementById('terminal').classList.remove("notfullscreen");
+                document.getElementById('echoxconsole_terminal').classList.add("fullscreen");
+                document.getElementById('echoxconsole_terminal').classList.remove("notfullscreen");
 
-                document.getElementById('terminalheader').classList.remove("absolute_position");
-                document.getElementById('terminalheader').classList.add("fixed_position");
+                document.getElementById('echoxconsole_terminalheader').classList.remove("absolute_position");
+                document.getElementById('echoxconsole_terminalheader').classList.add("fixed_position");
             }
             expand = !expand;
         });
 
 
-        // Minimize the Terminal
-        let box_long = true;
+        // Minimize the echoxconsole_terminal
+        let echoxconsole_box_long = true;
         document.getElementById("minimize").addEventListener("click", () => {
-            // minHeightBox
-            if(box_long === true){
-                document.getElementById('box').classList.add("minHeightBox");
+            // minHeightechoxconsole_box
+            if(echoxconsole_box_long === true){
+                document.getElementById('echoxconsole_box').classList.add("minHeightechoxconsole_box");
             }else{
-                document.getElementById('box').classList.remove("minHeightBox");
+                document.getElementById('echoxconsole_box').classList.remove("minHeightechoxconsole_box");
             }
-            box_long = !box_long;
+            echoxconsole_box_long = !echoxconsole_box_long;
         });
     }
     
@@ -256,21 +256,21 @@ class dispox_console extends Component {
             //     });
         }
     }
-    toggleTerminal(){
+    toggleechoxconsole_terminal(){
 
     }
 
       render() {
         return (
-            <div id="box">
-                <div id="terminal">
-                    { /* <div className="titleConsole">Terminal</div> */ }
-                    <div id="terminalheader">
-                        <div className="btnTerminal toggleTerminal close" title="Close terminal"></div>
-                        <div className="btnTerminal expandTerminal" id="expand" title="Expand terminal"></div>
-                        <div className="btnTerminal minimizeTerminal" id="minimize" title="Minimize terminal"></div>
+            <div id="echoxconsole_box">
+                <div id="echoxconsole_terminal">
+                    { /* <div className="titleConsole">echoxconsole_terminal</div> */ }
+                    <div id="echoxconsole_terminalheader">
+                        <div className="btnechoxconsole_terminal toggleechoxconsole_terminal close" title="Close echoxconsole_terminal"></div>
+                        <div className="btnechoxconsole_terminal expandechoxconsole_terminal" id="expand" title="Expand echoxconsole_terminal"></div>
+                        <div className="btnechoxconsole_terminal minimizeechoxconsole_terminal" id="minimize" title="Minimize echoxconsole_terminal"></div>
                     </div>
-                    <div className="statusHeader">
+                    <div className="echoxconsole_statusHeader">
                         <br/>
                         # ==========================================================================<br/>
                         # Welcome to Dispox cloud computing console <br/>
@@ -279,19 +279,19 @@ class dispox_console extends Component {
                         # ==========================================================================<br/><br/>
                     </div>
 
-                    <div className="statusWorking">
+                    <div className="echoxconsole_statusWorking">
                          --ML progress messages sections---------------------------------------------<br/>
                          {this.state.stop ? 
                             <div>
                                 * <span className="extraMiniInfoConsole">Estimate time : {this.state.estimate_time}</span><br/>
-                                <span>* [<span id="loading"></span>] Process onGoing, please wait for server to free some space...<br/></span>
+                                <span>* [<span id="echoxconsole_loading"></span>] Process onGoing, please wait for server to free some space...<br/></span>
                             </div>
                             :this.props.logs.length === 2 ? /* if == 2 the server is connected... technically */
-                                <span>* [<span id="loading"></span>] Server Connected, processing...<br/></span>:
+                                <span>* [<span id="echoxconsole_loading"></span>] Server Connected, processing...<br/></span>:
                                 !this.state.start_timer ? /* if not start timer Waiting for Connexion */
-                                    <span>* [<span id="loading"></span>] Waiting for Connexion ...<br/></span> :
+                                    <span>* [<span id="echoxconsole_loading"></span>] Waiting for Connexion ...<br/></span> :
                                     <span>
-                                        * <span className="extraMiniInfoConsole">Elapsed time : <span id="remaining-days">0</span>d - <span id="remaining-hours">00</span>h:<span id="remaining-minutes">00</span>m:<span id="remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
+                                        * <span className="extraMiniInfoConsole">Elapsed time : <span id="echoxconsole_remaining-days">0</span>d - <span id="echoxconsole_remaining-hours">00</span>h:<span id="echoxconsole_remaining-minutes">00</span>m:<span id="echoxconsole_remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
                                         {this.state.array_status_step[this.state.current_step]}
                                     </span>
                          }
