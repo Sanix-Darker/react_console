@@ -97,11 +97,13 @@ class dispox_console extends Component {
         let elem = document.getElementById('echoxconsole_box'),
         fadeInInterval,
         fadeOutInterval;
-        
+
+        let fadeOut_In = true;
         let echoxconsole_opens = document.getElementsByClassName('echoxconsole_open');
         for(let i = 0; i < echoxconsole_opens.length; i++) {
           ((index) => {
             echoxconsole_opens[index].addEventListener("click", () => {
+                fadeOut_In = true;
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
                 elem.fadeIn = (timing) => {
@@ -126,7 +128,7 @@ class dispox_console extends Component {
         for(let i = 0; i < echoxconsole_closes.length; i++) {
           ((index) => {
             echoxconsole_closes[index].addEventListener("click", () => {
-
+                fadeOut_In = false;
                 clearInterval(fadeInInterval);
                 clearInterval(fadeOutInterval);
                 elem.fadeOut = function(timing) {
@@ -243,6 +245,10 @@ class dispox_console extends Component {
             }
             echoxconsole_box_long = !echoxconsole_box_long;
         });
+
+        if(echoxconsole_box_long === false && fadeOut_In === true){
+            this.props.checkAvailableServer();
+        }
     }
     
     // handleKeyPress(event){
@@ -311,7 +317,7 @@ class dispox_console extends Component {
                                         {this.state.array_status_step[this.state.current_step]}
                                     </span>
                          :<div>
-                            * <span className="extraMiniInfoConsole">Connexion problems </span><br/>
+                            * <span className="extraMiniInfoConsole">Connexion to the server. </span><br/>
                             <span>* [<span id="echoxconsole_loading"></span>] DispoxConsole is trying to reconnect...<br/></span>
                         </div>}
                         ----------------------------------------------------------------------------

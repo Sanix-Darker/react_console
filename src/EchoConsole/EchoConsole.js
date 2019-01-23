@@ -57,10 +57,30 @@ class EchoConsole extends Component {
         console.log("nextProps: ", nextProps);
     }
 
+    checkAvailableServer(){
+        // const thiss = this;
+        // setInterval(() => {
+        //     axios.get(this.props.socket_server)
+        //         .then( (response) => {
+        //             //console.log("Console Connected");
+        //             // handle success
+        //             thiss.setState({
+        //                 connected: true
+        //             });
+        //         })
+        //         .catch( (error) => {
+        //             //console.log("Console not Connected");
+        //             // handle error
+        //             thiss.setState({
+        //                 connected: false
+        //             });
+        //         });
+        // }, 15000);
+    }
+
     componentDidMount(){
 
         // Faire un ping reccurent setinterval au serveur pour etre sur que le serveur soit toujours available
-        
         const socket = openSocket(this.props.socket_server+"/test");
         this.state.ddx_id = this.props.ddx_id;
 
@@ -68,20 +88,20 @@ class EchoConsole extends Component {
         setInterval(() => {
             axios.get(this.props.socket_server)
                 .then( (response) => {
-                    console.log("Console Connected");
+                    //console.log("Console Connected");
                     // handle success
                     thiss.setState({
                         connected: true
                     });
                 })
                 .catch( (error) => {
-                    console.log("Console not Connected");
+                    //console.log("Console not Connected");
                     // handle error
                     thiss.setState({
                         connected: false
                     });
                 });
-        }, 8500);
+        }, 15000);
 
         onConnect(this.state.ddx_id, socket, value => {
             console.log("onConnect value: "+value);
@@ -135,6 +155,7 @@ class EchoConsole extends Component {
     render() {
         return (<div>
                     <DispoxConsole ref="console"
+                        checkAvailableServer = {this.checkAvailableServer}
                         estimate_time = {this.state.estimate_time}
                         connected = {this.state.connected}
                         step = {this.state.step}
