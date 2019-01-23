@@ -21,7 +21,7 @@ class App extends Component {
             <button className="echoxconsole_close">Close</button>
           </p>
           <EchoConsole ddx_id = {ddx_id}
-                        socket_server = "http://192.168.56.1:5000"/>
+                        socket_server = "http://192.168.56.1:5000"/>{/* http://35.231.219.140:5000 */}
         </header>
         
       </div>

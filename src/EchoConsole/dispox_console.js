@@ -10,6 +10,7 @@ class dispox_console extends Component {
         start_timer: false,
         current_step: 0,
         stop: false,
+        connected: true,
         estimate_time: "",
         array_status_step: [
             <span>
@@ -46,7 +47,8 @@ class dispox_console extends Component {
             }),
             current_step: nextProps.step,
             estimate_time: nextProps.estimate_time,
-            stop: nextProps.stop
+            stop: nextProps.stop,
+            connected: nextProps.connected
         });
         //console.log("nextProps: ", nextProps);
 
@@ -84,6 +86,12 @@ class dispox_console extends Component {
     }
 
     componentDidMount(){
+
+        // if(document.getElementById("echoxconsole_estimate_time") !== null){
+        //     setTimeout(() => {
+        //         alert(document.getElementById("echoxconsole_estimate_time").innerText);
+        //     }, 1500);
+        // }
 
         // echoxconsole_close / echoxconsole_open echoxconsole_terminal
         let elem = document.getElementById('echoxconsole_box'),
@@ -237,28 +245,26 @@ class dispox_console extends Component {
         });
     }
     
-    handleKeyPress(event){
-        if(event.key === 'Enter'){
-            // console.log('enter press here! ')
-            // console.log("Youtr command: "+event.target.value+" can not be executed!");
-            // console.log("This feature has been disabled!");
-            // axios.get('http://localhost:5000/command?command='+event.target.value)
-            //     .then(response => {
-            //         console.log(response.data);
-            //         const log = <div>> {event.target.value}<br/>{response.data}<br/></div>
-            //         this.setState({
-            //             list_log: this.state.list_log+log
-            //         });
-            //         event.target.value = "";
-            //     })
-            //     .catch(response => {
-            //         console.log(response);
-            //     });
-        }
-    }
-    toggleechoxconsole_terminal(){
+    // handleKeyPress(event){
+    //     if(event.key === 'Enter'){
+    //         // console.log('enter press here! ')
+    //         // console.log("Youtr command: "+event.target.value+" can not be executed!");
+    //         // console.log("This feature has been disabled!");
+    //         // axios.get('http://localhost:5000/command?command='+event.target.value)
+    //         //     .then(response => {
+    //         //         console.log(response.data);
+    //         //         const log = <div>> {event.target.value}<br/>{response.data}<br/></div>
+    //         //         this.setState({
+    //         //             list_log: this.state.list_log+log
+    //         //         });
+    //         //         event.target.value = "";
+    //         //     })
+    //         //     .catch(response => {
+    //         //         console.log(response);
+    //         //     });
+    //     }
+    // }
 
-    }
 
       render() {
         return (
@@ -281,20 +287,33 @@ class dispox_console extends Component {
 
                     <div className="echoxconsole_statusWorking">
                          --ML progress messages sections---------------------------------------------<br/>
-                         {this.state.stop ? 
+                         {this.state.connected ? // If the server is connected or not
+                            this.state.stop ? // To manage with the ressource manager file
                             <div>
                                 * <span className="extraMiniInfoConsole">Estimate time : {this.state.estimate_time}</span><br/>
                                 <span>* [<span id="echoxconsole_loading"></span>] Process onGoing, please wait for server to free some space...<br/></span>
                             </div>
                             :this.props.logs.length === 2 ? /* if == 2 the server is connected... technically */
-                                <span>* [<span id="echoxconsole_loading"></span>] Server Connected, processing...<br/></span>:
-                                !this.state.start_timer ? /* if not start timer Waiting for Connexion */
-                                    <span>* [<span id="echoxconsole_loading"></span>] Waiting for Connexion ...<br/></span> :
-                                    <span>
-                                        * <span className="extraMiniInfoConsole">Elapsed time : <span id="echoxconsole_remaining-days">0</span>d - <span id="echoxconsole_remaining-hours">00</span>h:<span id="echoxconsole_remaining-minutes">00</span>m:<span id="echoxconsole_remaining-seconds">00</span>s | Estimate time : {this.state.estimate_time}</span> <br/>
+                                <span>* [<span id="echoxconsole_loading"></span>] Server Connected, processing...<br/></span>
+                                :!this.state.start_timer ? /* if not start timer Waiting for Connexion */
+                                    <span>* [<span id="echoxconsole_loading"></span>] Waiting for Connexion ...<br/></span> 
+                                    :<span>
+                                        * <span className="extraMiniInfoConsole">Elapsed time : <span id="echoxconsole_elapsed_time">
+                                                                                                        <span id="echoxconsole_remaining-days">0</span>d - 
+                                                                                                        <span id="echoxconsole_remaining-hours">00</span>h:
+                                                                                                        <span id="echoxconsole_remaining-minutes">00</span>m:
+                                                                                                        <span id="echoxconsole_remaining-seconds">00</span>s
+                                                                                                </span>
+                                                                                 | Estimate time : <span id="echoxconsole_estimate_time">
+                                                                                                        {this.state.estimate_time}
+                                                                                                    </span>
+                                            </span> <br/>
                                         {this.state.array_status_step[this.state.current_step]}
                                     </span>
-                         }
+                         :<div>
+                            * <span className="extraMiniInfoConsole">Connexion problems </span><br/>
+                            <span>* [<span id="echoxconsole_loading"></span>] DispoxConsole is trying to reconnect...<br/></span>
+                        </div>}
                         ----------------------------------------------------------------------------
                     </div>
                     <nav>

@@ -13,6 +13,8 @@ import {onStop,
         onDisConnected} from './socket';
 import openSocket from 'socket.io-client';
 
+import axios from 'axios';
+
 class EchoConsole extends Component {
     constructor (props){
         super(props);
@@ -22,7 +24,8 @@ class EchoConsole extends Component {
             logs: [],
             step: 0,
             estimate_time: "Calculating....",
-            stop: false
+            stop: false,
+            connected: false
         }
     }
 
@@ -49,9 +52,8 @@ class EchoConsole extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        this.setState({
-            ddx_id: nextProps.ddx_id
-        });
+
+        this.state.ddx_id = nextProps.ddx_id;
         console.log("nextProps: ", nextProps);
     }
 
@@ -60,9 +62,29 @@ class EchoConsole extends Component {
         // Faire un ping reccurent setinterval au serveur pour etre sur que le serveur soit toujours available
         
         const socket = openSocket(this.props.socket_server+"/test");
+        this.state.ddx_id = this.props.ddx_id;
+
+        const thiss = this;
+        setInterval(() => {
+            axios.get(this.props.socket_server)
+                .then( (response) => {
+                    console.log("Console Connected");
+                    // handle success
+                    thiss.setState({
+                        connected: true
+                    });
+                })
+                .catch( (error) => {
+                    console.log("Console not Connected");
+                    // handle error
+                    thiss.setState({
+                        connected: false
+                    });
+                });
+        }, 8500);
 
         onConnect(this.state.ddx_id, socket, value => {
-            //console.log("onConnect value: "+value);
+            console.log("onConnect value: "+value);
             //this.addLogs("Trying to connect to PythonService...");
         });
         this.addLogs("Trying to connect to PythonService...");
@@ -114,6 +136,7 @@ class EchoConsole extends Component {
         return (<div>
                     <DispoxConsole ref="console"
                         estimate_time = {this.state.estimate_time}
+                        connected = {this.state.connected}
                         step = {this.state.step}
                         stop = {this.state.stop}
                         logs={this.state.logs}/>

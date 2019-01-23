@@ -34,6 +34,17 @@ import EchoConsole from './EchoConsole/EchoConsole'
 <!-- close and open the console with echoxconsole_open/echoxconsole_close classes -->
 <button className="echoxconsole_open">echoxconsole_open</button>
 <button className="echoxconsole_close">echoxconsole_close</button>
+
+<!-- ------------------------------------ -->
+<!-- To access extras informations use theese selector and get their content: -->
+
+<!-- Elapsed time -->
+#echoxconsole_elapsed_time
+
+<!-- Estimated time -->
+#echoxconsole_estimate_time
+
+<!-- alert(document.getElementById("echoxconsole_estimate_time").innerText);
 ```
 
 ## Render
