@@ -25,7 +25,7 @@ class EchoConsole extends Component {
             step: 0,
             estimate_time: "Calculating....",
             stop: false,
-            connected: false
+            connected: true
         }
     }
 
