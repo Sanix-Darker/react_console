@@ -24,13 +24,43 @@ yarn start
 ## How to use
 ```js
 import EchoConsole from './EchoConsole/EchoConsole'
+ 
+// Pass the EchoConsole's parameters as defined -->
+  constructor (props){
+    super(props);
+
+    this.state = {
+        logs: [], // Array of log for this client
+        step: 0, // Step is a log with type=step and value message we have 0,1,2,3,4 and 5
+        estimate_time: "Calculating....",// Estimatetime is a log with type=estimatetime and value is message
+        stop: false, // stop is the status of stopping or starting the python MicroService
+        connected: true // This params determine whetheir if the Serveur is connected or not
+    }
+  }
+
+  // This method appends logs in an array
+  addLogs(newlog){
+      let all_log = this.state.logs;
+      all_log.unshift("> "+newlog);
+      this.setState({
+          logs: all_log
+      });
+  }
+
+  render() {
+
+    return (
+        ....
+          <EchoConsole  estimate_time = {this.state.estimate_time}
+                        connected = {this.state.connected}
+                        step = {this.state.step}
+                        stop = {this.state.stop}
+                        logs={this.state.logs} />
+        ....
 ```
 
+Now to handle the console, we have:
 ```html
-<!-- Pass the socket server url to EchoConsole -->
-<EchoConsole ddx_id = {ddx_id}
-            socket_server = "http://192.168.56.1:5000"/>
-
 <!-- close and open the console with echoxconsole_open/echoxconsole_close classes -->
 <button className="echoxconsole_open">echoxconsole_open</button>
 <button className="echoxconsole_close">echoxconsole_close</button>
