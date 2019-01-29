@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import uuid from 'uuid/v4';
-
 import EchoConsole from './EchoConsole/EchoConsole';
 
 class App extends Component {
@@ -13,9 +11,6 @@ class App extends Component {
 
     this.state = {
         logs: [], // Array of log for this client
-        step: 0, // Step is a log with type=step and value message
-        estimate_time: "Calculating....",// Estimatetime is a log with type=estimatetime and value is message
-        stop: false, // stop is the status of stopping or starting the python MicroService
         connected: true // This params determine whetheir if the Serveur is connected or not
     }
   }
@@ -40,10 +35,7 @@ class App extends Component {
             <button className="echoxconsole_open">Open</button>
             <button className="echoxconsole_close">Close</button>
           </p>
-          <EchoConsole  estimate_time = {this.state.estimate_time}
-                        connected = {this.state.connected}
-                        step = {this.state.step}
-                        stop = {this.state.stop}
+          <EchoConsole connected = {this.state.connected}
                         logs={this.state.logs} />
         </header>
         

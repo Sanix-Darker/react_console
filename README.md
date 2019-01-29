@@ -31,9 +31,6 @@ import EchoConsole from './EchoConsole/EchoConsole'
 
     this.state = {
         logs: [], // Array of log for this client
-        step: 0, // Step is a log with type=step and value message we have 0,1,2,3,4 and 5
-        estimate_time: "Calculating....",// Estimatetime is a log with type=estimatetime and value is message
-        stop: false, // stop is the status of stopping or starting the python MicroService
         connected: true // This params determine whetheir if the Serveur is connected or not
     }
   }
@@ -51,10 +48,7 @@ import EchoConsole from './EchoConsole/EchoConsole'
 
     return (
         ....
-          <EchoConsole  estimate_time = {this.state.estimate_time}
-                        connected = {this.state.connected}
-                        step = {this.state.step}
-                        stop = {this.state.stop}
+          <EchoConsole  connected = {this.state.connected}
                         logs={this.state.logs} />
         ....
 ```

@@ -16,11 +16,37 @@ class EchoConsole extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        this.state = nextProps;
+        this.state.logs = nextProps.logs;
+        let array_logs = nextProps.reverse();
+        array_logs.map(log => {
+            if(log.type === "step"){
+                this.state.step = log.message;
+            }
+            if(log.type === "stop"){
+                this.state.stop = log.message;
+            }
+            if(log.type === "estimatetime"){
+                this.state.estimate_time = log.message;
+            }
+        });
+        this.state.connected = nextProps.connected;
     }
 
     componentDidMount(){
-        this.state = this.props;
+        this.state.logs = this.props.logs;
+        let array_logs = this.props.reverse();
+        array_logs.map(log => {
+            if(log.type === "step"){
+                this.state.step = log.message;
+            }
+            if(log.type === "stop"){
+                this.state.stop = log.message;
+            }
+            if(log.type === "estimatetime"){
+                this.state.estimate_time = log.message;
+            }
+        });
+        this.state.connected = this.props.connected;
     }
 
     render() {
