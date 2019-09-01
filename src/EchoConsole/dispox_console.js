@@ -14,28 +14,28 @@ class dispox_console extends Component {
         estimate_time: "",
         array_status_step: [
             <span>
-                * [<span id="echoxconsole_loading"></span>] Data generation for machine learning.<br/>
+                * [<span id="echoxconsole_loading"></span>] Step 1 ongoing....<br/>
             </span>,
             <span>
-                * [<b>✓</b>] Data generation for machine learning.<br/>
-                * [<span id="echoxconsole_loading"></span>] Model training...<br/>
+                * [<b>✓</b>] Step 1 done<br/>
+                * [<span id="echoxconsole_loading"></span>] Step 2 ongoing....<br/>
             </span>,
             <span>
-                * [<b>✓</b>] Data generation for machine learning.<br/>
-                * [<b>✓</b>] Model training.<br/>
-                * [<span id="echoxconsole_loading"></span>] ATM (Analytic Twin Model) generation...<br/>
+                * [<b>✓</b>] Step 1 done<br/>
+                * [<b>✓</b>] Step 2 done<br/>
+                * [<span id="echoxconsole_loading"></span>] Step 3 ongoing......<br/>
             </span>,
             <span>
-                * [<b>✓</b>] Data generation for machine learning.<br/>
-                * [<b>✓</b>] Model training.<br/>
-                * [<b>✓</b>] ATM (Analytic Twin Model) generation.<br/>
-                * [<span id="echoxconsole_loading"></span>] Model ready for scoring... (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
+                * [<b>✓</b>] Step 1 done<br/>
+                * [<b>✓</b>] Step 2 done<br/>
+                * [<b>✓</b>] Step 3 done<br/>
+                * [<span id="echoxconsole_loading"></span>] Step 4 ongoing...<br/>
             </span>,
             <span>
-                * [<b>✓</b>] Data generation for machine learning.<br/>
-                * [<b>✓</b>] Model training.<br/>
-                * [<b>✓</b>] ATM (Analytic Twin Model) generation.<br/>
-                * [<b>✓</b>] Model ready for scoring. (this is the final message with production rate<br/> &nbsp; &nbsp; &nbsp; displayed on the console)<br/>
+                * [<b>✓</b>] Step 1 done<br/>
+                * [<b>✓</b>] Step 2 done<br/>
+                * [<b>✓</b>] Step 3 done<br/>
+                * [<b>✓</b>] Step 4 done<br/>
             </span>
         ]
     }
@@ -74,10 +74,8 @@ class dispox_console extends Component {
 
         let s = new Date().getTime(),
             x = setInterval(function() {
-    
             let present = new Date().getTime(),
                 gap = s - present;
-    
                 document.getElementById('echoxconsole_remaining-days').innerText = -(Math.floor(gap / (day)) + 1);
                 document.getElementById('echoxconsole_remaining-hours').innerText = -(Math.floor((gap % (day)) / (hour)) + 1);
                 document.getElementById('echoxconsole_remaining-minutes').innerText = -(Math.floor((gap % (hour)) / (minute)) + 1);

@@ -38,7 +38,6 @@ class App extends Component {
           <EchoConsole connected = {this.state.connected}
                         logs={this.state.logs} />
         </header>
-        
       </div>
     );
   }
